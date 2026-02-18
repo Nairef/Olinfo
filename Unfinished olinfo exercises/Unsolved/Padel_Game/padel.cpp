@@ -29,26 +29,24 @@ int main() {
             for (int j=i;j<N;j++){
                 if (W[j] == 1){
                     A++;
+                    if (A >= 4 && A-B >= 2){
+                        results[i]++;
+                        A = 0;
+                        B = 0;
+                    }
                 } else if (W[j] == 2) {
                     B++;
-                }
-                if (A >= 4 && A-B < 3){
-                    results[i]++;
-                    A = 0;
-                    B = 0;
-                } else if (B >= 4 && B-A < 3){
-                    results[i]++;
-                    A = 0;
-                    B = 0;
+                    if (B >= 4 && B-A >= 2){
+                        results[i]++;
+                        A = 0;
+                        B = 0;
+                    }
                 }
             }
+            A = 0;
+            B = 0;
         }
-        K = results[0];
-        for (i = 1; i < N; i++){
-            if (results[i] > results[i-1]){
-                K = results[i];
-            }
-        }
+        K = max(results[0], results[N-1]);
         cout << K << endl;
     }
 
